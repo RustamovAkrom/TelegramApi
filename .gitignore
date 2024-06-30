@@ -1,0 +1,6 @@
+__pycache__/
+.idea/
+.env/
+media/
+.env
+database_tables.yaml
