@@ -7,12 +7,14 @@ REST_FRAMEWORK['DEFAULT_SCHEMA_CLASS'] = "drf_spectacular.openapi.AutoSchema"
 REST_FRAMEWORK['DEFAULT_AUTHENTICATION_CLASSES'] = ("rest_framework_simplejwt.authentication.JWTAuthentication", )
 
 
-
 SPECTACULAR_SETTINGS = {
     "SWAGGER_UI_DIST": "SIDECAR",
     "SWAGGER_UI_FAVICON_HREF": "SIDECAR",
     "REDOC_DIST": "SIDECAR",
     "TITLE": "Django Rest API",
-    "DESCRIPTION": "Django Rest API",
+    "DESCRIPTION": "Django Rest Telegram Api",
+    "VERSION": "v1"
 }
 
+SPECTACULAR_SETTINGS_ACTIVE = True # Activator 
+SWAGERS_MULTILANGUAGES = True # swaggers multilanguage activator

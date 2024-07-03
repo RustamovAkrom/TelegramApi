@@ -13,14 +13,16 @@ urlpatterns = [
     path("i18n/", include("django.conf.urls.i18n")),
 ]
 
-urlpatterns += i18n_patterns(
-    path("admin/", admin.site.urls),
-    path("api/v1/account/", include("apps.account.urls")),
-    path("api/v1/telegram/", include("apps.telegram.urls")),
+urlpatterns_i18n = i18n_patterns(
+    path(_("admin/"), admin.site.urls),
+    path(_("api/v1/account/"), include("apps.account.urls")),
+    path(_("api/v1/telegram/"), include("apps.telegram.urls")),
 )
 
-urlpatterns += swager_urlpatterns
+urlpatterns_i18n += swager_urlpatterns
+urlpatterns += urlpatterns_i18n
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

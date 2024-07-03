@@ -1,6 +1,7 @@
 __pycache__/
 .idea/
 .env/
+env/
 media/
 .env
 database_tables.yaml

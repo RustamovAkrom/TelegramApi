@@ -18,7 +18,7 @@ DEBUG = os.getenv("DEBUG") in ["true", "True", "1"]
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
-INSTALLED_APPS = DEFAULT_DJANGO_APPS + INSTALLED_PIP_APPS + PROJECT_CREATING_APPS
+INSTALLED_APPS = INSTALLED_PACKAGES_APPS + DEFAULT_DJANGO_APPS + PROJECT_DJANGO_APPS
 
 
 MIDDLEWARE = [
@@ -51,6 +51,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "config.wsgi.application"
+ASGI_APPLICATION = "config.asgi.application"
 
 
 DATABASES = {
@@ -60,15 +61,14 @@ DATABASES = {
     }
 }
 
-
 # DATABASES = {
 #     "default": {
 #         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": ...,
-#         "USER": ...,
-#         "PASSWORD": ...,
-#         "HOST": ...,
-#         "PORT": ...,
+#         "NAME": os.getenv("NAME"),
+#         "USER": os.getenv("USER"),
+#         "PASSWORD": os.getenv("PASSWORD"),
+#         "HOST": os.getenv("HOST"),
+#         "PORT": os.getenv("PORT"),
 #     }
 # }
 
@@ -100,7 +100,7 @@ LOCALE_PATHS = [
     BASE_DIR.joinpath("locale"),
 ]
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "en"
 
 TIME_ZONE = "Asia/Tashkent"
 
@@ -109,10 +109,10 @@ USE_L10N = True
 
 USE_TZ = True
 
-PHONENUMBER_REGION = "UZ"
+PHONENUMBER_REGION = "UZ" # defaul region phone
 
 STATIC_URL = "static/"
-# STATIC_ROOT = BASE_DIR.joinpath("static")
+STATIC_ROOT = BASE_DIR.joinpath("staticfiles")
 STATICFILES_DIRS = [BASE_DIR.joinpath("static")]
 
 MEDIA_URL = "media/"
@@ -120,3 +120,4 @@ MEDIA_ROOT = BASE_DIR.joinpath("media")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+AUTHENTICATION_TOKEN = os.getenv("AUTHENTICATION_TOKEN")

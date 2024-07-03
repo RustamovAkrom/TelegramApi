@@ -8,19 +8,14 @@ application = get_wsgi_application()
 
 from apps.account.models import User, UserAccount
 
-account = UserAccount.objects.create(phone_number = "+20203040s", username = "Akromjon4")
 
-user = User.objects.create(
-    account = account,
+user = User(
+    is_active = True,
     is_staff = True,
     is_superuser = True,
-    username = "Akromjon4",
-    phone_number = "+20203040s",
+    username = input("Username: "),
+    phone_number = input("Phone Number:"),
 )
-
-user.set_password("2007")
+user.set_password(input("Password"))
 user.save()
-
-# account.phone_number = user.phone_number
-# account.username = user.username
-# account.save()
+UserAccount.objects.create(user = user, username = user.username, phone_number = user.phone_number)

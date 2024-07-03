@@ -2,15 +2,15 @@ from typing import Iterable
 from django.db import models
 from django.contrib.auth.models import AbstractUser, AbstractBaseUser
 from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 from apps.shared.models import BaseSharedModel
-
-# from phonenumber_field.modelfields import PhoneNumberField
+from phonenumber_field.modelfields import PhoneNumberField
 from config import settings
 
 
 class Stories(BaseSharedModel):
-    storie = models.FileField(upload_to="usr/account/stories/%Y/%m/%d")
-    message = models.CharField(max_length=120, blank=True, null=True)
+    storie = models.FileField(_("stories"), upload_to="usr/account/stories/%Y/%m/%d", help_text=_("Required. stories"))
+    message = models.CharField(_("messages"), max_length=120, blank=True, null=True)
 
     def __str__(self):
         return self.storie.url
@@ -21,20 +21,28 @@ class Stories(BaseSharedModel):
             models.Index(fields=['created_at'])
         ]
         db_table = "stories"
+        verbose_name = _("storie")
+        verbose_name_plural = _("stories")
 
     
 class UserAccount(BaseSharedModel):
-    avatar = models.ImageField(upload_to="usr/account/avatars/%Y/%m/%d", blank=True, null=True)
-    bio = models.CharField(max_length=70, blank=True, null=True)
-    first_name = models.CharField(max_length=70, blank=True, null=True)
-    last_name = models.CharField(max_length=70, blank=True, null=True)
-    phone_number = models.CharField(max_length=14) #region=settings.PHONENUMBER_REGION)
-    username = models.CharField(max_length=120)
-    date_of_berth = models.DateField(blank=True, null=True)
-    stories = models.ForeignKey(Stories, models.CASCADE, related_name="stories_user_account", blank=True, null=True)
+    user = models.ForeignKey("account.User", models.DO_NOTHING, related_name="user_account")
+    avatar = models.ImageField(_("avatar"), upload_to="usr/account/avatars/%Y/%m/%d", blank=True, null=True)
+    bio = models.CharField(_("bio"), max_length=70, blank=True, null=True)
+    first_name = models.CharField(_("first name"), max_length=70, blank=True, null=True)
+    last_name = models.CharField(_("last name"), max_length=70, blank=True, null=True)
+    phone_number = PhoneNumberField(_("phone number"), unique=True, region=settings.PHONENUMBER_REGION)
+    username = models.CharField(_("username"), max_length=120)
+    date_of_berth = models.DateField(_("date of berth"), blank=True, null=True)
+    stories = models.ManyToManyField(Stories, related_name="stories_user_account", blank=True)
 
     def __str__(self):
         return str(self.username)
+    
+    def save(self, *args, **kwargs):
+        if str(self.username[0]) != "@":
+            self.username = f"@{self.username}"
+        return super().save(*args, **kwargs)
     
     class Meta:
         ordering = ["-created_at"]
@@ -42,18 +50,14 @@ class UserAccount(BaseSharedModel):
             models.Index(fields=['created_at'])
         ]
         db_table = "user_accounts"
+        verbose_name = _("user account")
+        verbose_name_plural = _("user accounts")
 
 
 class User(AbstractUser):
-    phone_number = models.CharField(unique=True, max_length=14) #region=settings.PHONENUMBER_REGION)
-    account = models.ForeignKey(UserAccount, models.DO_NOTHING, related_name="account_user", blank=True)
-
-    def save(self, *args, **kwargs) -> None:
-        account = UserAccount.objects.create(username = self.username, phone_number = self.phone_number)
-        self.account = account
-        
-        return super().save(*args, **kwargs)
-    
+    token = models.CharField(_("token"), max_length=200, blank=True, null=True)
+    is_active = models.BooleanField(_("is active"), default=False)
+    phone_number = PhoneNumberField(_("phone number"),unique=True, region=settings.PHONENUMBER_REGION)
 
     def __str__(self) -> str:
         return self.username
@@ -61,7 +65,7 @@ class User(AbstractUser):
 
 class SavedMessages(BaseSharedModel):
     user = models.ForeignKey(UserAccount, models.CASCADE, related_name="user_saved_messages")
-    message = models.TextField()
+    message = models.TextField(_("message"))
 
     def __str__(self):
         return f"Saved Message( {self.user} )"
@@ -72,3 +76,5 @@ class SavedMessages(BaseSharedModel):
             models.Index(fields=['created_at'])
         ]
         db_table = "saved_messages"
+        verbose_name = _("saved message")
+        verbose_name_plural = _("saved messages")
