@@ -2,7 +2,7 @@ INSTALLED_PACKAGES_APPS = [
     # "rosetta",
     "jazzmin",
     "rest_framework", 
-    # "drf_yasg",
+    "drf_yasg",
     "drf_spectacular",
     "drf_spectacular_sidecar",
     "modeltranslation", # pip install django-modeltranslation

@@ -3,6 +3,14 @@ from django.utils.translation import gettext_lazy as _
 from apps.shared.models import BaseSharedModel
 
 
+# class ContactUser(BaseSharedModel):
+#     user = models.ForeignKey("account.UserAccount", models.CASCADE, related_name="account_contact_users")
+
+
+# class Contact(BaseSharedModel):
+#     user = models.ManyToManyField(ContactUser, related_name="contact_user_contacts")
+
+
 class ChatUser(BaseSharedModel):
     user = models.OneToOneField("account.UserAccount", models.CASCADE, related_name="user_chat")
     is_active = models.BooleanField(_("is active"), default=True)
@@ -158,6 +166,7 @@ class ChannelDiscusion(BaseSharedModel):
     def __str__(self) -> str:
         return self.group.name
 
+
 class ChannelMessage(BaseSharedModel):
     user = models.ForeignKey(ChannelUser, models.CASCADE, related_name="channel_user_messages")
     message = models.TextField(_("message"))
@@ -173,7 +182,7 @@ class Channel(BaseSharedModel):
     messages = models.ForeignKey(ChannelMessage, models.CASCADE, related_name="message_channel", blank=True, null=True)
     users = models.ManyToManyField(ChannelUser, related_name="users_channel")
     stories = models.ManyToManyField(ChannelStories, related_name="stories_channel", blank=True)
-    discusions = models.OneToOneField(ChannelDiscusion, models.CASCADE, related_name="discusion_channel")
+    discusions = models.OneToOneField(ChannelDiscusion, models.CASCADE, related_name="discusion_channel", blank=True, null=True)
 
     def __str__(self) -> str:
         return self.name

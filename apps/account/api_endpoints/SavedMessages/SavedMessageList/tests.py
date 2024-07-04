@@ -23,4 +23,4 @@ class SavedMessageListTest(BaseSharedTestCase):
         for data in response_data:
             saved_message = SavedMessages.objects.filter(user = self.account, message = data['message'])
             self.assertTrue(saved_message.exists())
-            
+             

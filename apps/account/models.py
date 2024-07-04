@@ -35,7 +35,8 @@ class UserAccount(BaseSharedModel):
     username = models.CharField(_("username"), max_length=120)
     date_of_berth = models.DateField(_("date of berth"), blank=True, null=True)
     stories = models.ManyToManyField(Stories, related_name="stories_user_account", blank=True)
-
+    is_premium = models.BooleanField(default=False)
+    
     def __str__(self):
         return str(self.username)
     
