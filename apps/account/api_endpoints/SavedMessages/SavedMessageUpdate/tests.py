@@ -11,18 +11,15 @@ class SavedMessageListTest(BaseSharedTestCase):
         return super().setUp()
     
     def test_list_saved_message(self):
+        saved_message = SavedMessages.objects.create(user = self.account, message = "message1")
 
-        for i in range(1, 4):
-            SavedMessages.objects.create(user = self.account, message = f"message{i}")
+        url = self.url + reverse("account:saved-message-update", kwargs={"pk": saved_message.pk})
 
-        for i in range(1, 4):
-                
-            url = self.url + reverse("account:saved-message-update", kwargs={"pk":i})
-            data = {
-                "user": self.account,
-                "message": f"message{i * 2}"
-            }
-            response = self.client.put(path=url, data=data, headers=self.headers)
-            response_data = response.json()
-            print(response_data)
-            print(response.status_code)
+        data = {
+            "user": self.account,
+            "message": "message updated"
+        }
+
+        response = self.client.patch(path=url, data=data, format="json", accept="application/data")
+        print(response.status_code)
+        print(response.json())

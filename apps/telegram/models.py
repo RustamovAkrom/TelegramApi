@@ -105,7 +105,6 @@ class Group(BaseSharedModel):
     photo = models.ImageField(_("photo"), upload_to="telegram/channel/photos/%Y/%m/%d", default="group.jpg", blank=True, null=True)
     name = models.CharField(_("name"), max_length=100)
     description = models.CharField(_("description"), max_length=150, blank=True, null=True)
-    is_public = models.BooleanField(_("is public"), default=False)
     public_link = models.CharField(_("public link"), max_length=120, blank=True, null=True, unique=True)
     private_link = models.CharField(_("private link"), max_length=120, unique=True)
     messages = models.ForeignKey(GroupMessage, models.CASCADE, related_name="message_group", blank=True, null=True)

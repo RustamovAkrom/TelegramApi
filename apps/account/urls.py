@@ -30,6 +30,7 @@ urlpatterns = [
     path(_("user-activate/"), UserActivateApiView.as_view(), name="user-activate"),
     path(_("user-create/"), UserCreateApiView.as_view(), name="user-create"),
     path(_("user-list/"), UserListApiView.as_view(), name="user-list"),
+    path(_("user-destroy/<int:pk>"), UserDestroyApiView.as_view(), name="user-destroy"),
     # UserAccount
     path(_("user-account-create/"), UserAccountCreateApiView.as_view(), name="user-account-create"),
     path(_("user-account-destroy/<int:pk>"), UserAccountDestroyApiView.as_view(), name="user-account-destroy"),

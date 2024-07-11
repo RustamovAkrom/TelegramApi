@@ -4,7 +4,7 @@ from .serializers import UserListSerializer
 
 
 class UserListApiView(ListAPIView):
-    queryset = User.objects.all()
+    queryset = User.objects.filter(is_active = True)
     serializer_class = UserListSerializer
 
 

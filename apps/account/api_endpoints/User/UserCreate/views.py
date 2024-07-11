@@ -32,7 +32,7 @@ class UserCreateApiView(APIView):
                 user.save()
 
                 return Response(data={"detail": _(f"{user.username} successfully created. Activate account link -> {activated_account_link}")}, status=status.HTTP_201_CREATED)
-            return Response(data={"detail": _("<phone_number> or <username> not found")}, status=status.HTTP_404_NOT_FOUND)
+            return Response(data={"detail": _("<phone_number> or <username> or <password> not found")}, status=status.HTTP_404_NOT_FOUND)
         except:
             return Response(data={"detail":_("Internal Server Error")}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     

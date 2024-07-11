@@ -20,7 +20,10 @@ JAZZMIN_SETTINGS = {
         {"name": "Home", "url": "/", "new_window": False},
         {"name": "Swager-ui", "url": "/en/swagger-ui/", "new_window": False},
         {"name": "Reodoc", "url": "/en/reodoc/", "new_window": False},
+        {"name": "Token", "url": "/en/api/v1/account/token/", "new_window":False},
+        {"name": "Token Refresh", "url": "/en/api/v1/account/token/refresh/", "new_window":False}
     ],
+    "usermenu_links": [],
     "copyright": "Telegram Api Admin",
     "default_icon_parents": "fas fa-chevron-circle-right",
     "default_icon_children": "fas fa-circle",
