@@ -14,8 +14,10 @@ user = User(
     is_staff = True,
     is_superuser = True,
     username = input("Username: "),
-    phone_number = input("Phone Number:"),
+    phone_number = input("Phone Number: "),
+    token = input("Your Authentication Token: ")
 )
-user.set_password(input("Password"))
+user.set_password(input("Password: "))
 user.save()
+
 UserAccount.objects.create(user = user, username = user.username, phone_number = user.phone_number)

@@ -4,7 +4,7 @@ from apps.telegram.models import Channel
 
 
 class ChannelCreateApiView(CreateAPIView):
-    queryset = Channel.objects.all()
+    queryset = Channel
     serializer_class = ChannelCreateSerializer
 
 __all__ = ("ChannelCreateApiView", )

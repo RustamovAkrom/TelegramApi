@@ -12,11 +12,12 @@ load_dotenv(".env")
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = os.getenv("DEBUG") in ["true", "True", "1"]
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+ALLOWED_HOSTS = []
 
 INSTALLED_APPS = INSTALLED_PACKAGES_APPS + DEFAULT_DJANGO_APPS + PROJECT_DJANGO_APPS
 
@@ -30,8 +31,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    # "config.middleware.middleware1.FirstMiddleware"
 ]
+
 
 ROOT_URLCONF = "config.urls"
 
@@ -64,12 +65,14 @@ DATABASES = {
 
 # DATABASES = {
 #     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": os.getenv("NAME"),
-#         "USER": os.getenv("USER"),
-#         "PASSWORD": os.getenv("PASSWORD"),
-#         "HOST": os.getenv("HOST"),
-#         "PORT": os.getenv("PORT"),
+#        "ENGINE": "django.db.backends.postgresql",
+#        "NAME": os.getenv("NAME"),
+#        "USER": os.getenv("USER"),
+#        "PASSWORD": os.getenv("PASSWORD"),
+#        "HOST": os.getenv("HOST"),
+#        "PORT": os.getenv("PORT"),
+#        "CONN_MAX_AGE": 600,  # Время жизни соединения (в секундах)
+
 #     }
 # }
 
@@ -121,4 +124,31 @@ MEDIA_ROOT = BASE_DIR.joinpath("media")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-AUTHENTICATION_TOKEN = os.getenv("AUTHENTICATION_TOKEN")
+AUTHENTICATION_TOKEN = os.getenv("AUTHENTICATION_TOKEN") # null True
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = TIME_ZONE
+
+# Logging
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'file': {
+#             'level': 'DEBUG',
+#             'class': 'logging.FileHandler',
+#             'filename': 'debug.log',
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['file'],
+#             'level': 'DEBUG',
+#             'propagate': True,
+#         },
+#     },
+# }

@@ -1,10 +1,10 @@
-from rest_framework.generics import RetrieveAPIView
+from rest_framework.generics import RetriveAPIView
 from .serializers import ChannelRetriveSerializer
 from apps.telegram.models import Channel
 
 
-class ChannelRetriveApiView(RetrieveAPIView):
-    queryset = Channel.objects.all()
+class ChannelRetriveApiView(RetriveAPIView):
+    queryset = Channel
     serializer_class = ChannelRetriveSerializer
 
 __all__ = ("ChannelRetriveApiView", )

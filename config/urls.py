@@ -11,16 +11,16 @@ from .swagger import swager_urlpatterns
 
 urlpatterns = [
     path("i18n/", include("django.conf.urls.i18n")),
+    path("", include("apps.shared.urls")),
 ]
 
-urlpatterns_i18n = i18n_patterns(
+urlpatterns += i18n_patterns(
     path(_("admin/"), admin.site.urls),
     path(_("api/v1/account/"), include("apps.account.urls")),
     path(_("api/v1/telegram/"), include("apps.telegram.urls")),
 )
 
-urlpatterns_i18n += swager_urlpatterns
-urlpatterns += urlpatterns_i18n
+urlpatterns += swager_urlpatterns
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
