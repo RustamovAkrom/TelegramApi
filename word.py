@@ -1,6 +1,6 @@
 import os
 
-methods = ("Create", "Destroy", "Update", "Retrive", "List")
+methods = ("Create", "Destroy", "Update", "Retrieve", "List")
 
 files = lambda model_import_from, model_name, method, fields: {
 
@@ -10,7 +10,7 @@ files = lambda model_import_from, model_name, method, fields: {
 from {model_import_from} import {model_name}
 
 
-class {model_name}{method}Serializer:
+class {model_name}{method}Serializer(ModelSerializer):
     class Meta:
         model = {model_name}
         fields = {fields}
@@ -22,7 +22,7 @@ from {model_import_from} import {model_name}
 
 
 class {model_name}{method}ApiView({method}APIView):
-    queryset = {model_name}
+    queryset = {model_name}.objects.all()
     serializer_class = {model_name}{method}Serializer
 
 __all__ = ("{model_name}{method}ApiView", )
@@ -52,7 +52,6 @@ def mkdirs_app_apis():
 
     model_import_from = ".".join(model_import_from_input.split(".")[:-1])
     model_name = model_import_from_input.split(".")[-1]
-    print(model_name)
 
     if os.path.exists(app_api_dir):
 
@@ -70,15 +69,17 @@ def mkdirs_app_apis():
 
                 with open(method_dir_path_file, "w") as file:
                     file.write(code)
-
+            
         with open(os.path.join(app_api_dir, "__init__.py"), "w") as init_file:
             init_file.write(_init_file(model_name))
+
+        return f"Successfully appended on path --> {app_api_dir}"
 
     return f"{app_api_dir} Does not exist!"
 
 
 def main():
-    mkdirs_app_apis()
+    print(mkdirs_app_apis())
 
 if __name__=="__main__":
     main()

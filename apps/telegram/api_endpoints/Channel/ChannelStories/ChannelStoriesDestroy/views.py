@@ -1,10 +1,10 @@
 from rest_framework.generics import DestroyAPIView
-from .serializers import ChannelStoriesDestroySerializer
+from .serializers import ChannelStorieDestroySerializer
 from apps.telegram.models import ChannelStories
 
 
-class ChannelStoriesDestroyApiView(DestroyAPIView):
-    queryset = ChannelStories
-    serializer_class = ChannelStoriesDestroySerializer
+class ChannelStorieDestroyApiView(DestroyAPIView):
+    queryset = ChannelStories.objects.all()
+    serializer_class = ChannelStorieDestroySerializer
 
-__all__ = ("ChannelStoriesDestroyApiView", )
+__all__ = ("ChannelStorieDestroyApiView", )

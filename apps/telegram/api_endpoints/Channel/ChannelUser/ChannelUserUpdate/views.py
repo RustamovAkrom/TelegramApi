@@ -4,7 +4,7 @@ from apps.telegram.models import ChannelUser
 
 
 class ChannelUserUpdateApiView(UpdateAPIView):
-    queryset = ChannelUser
+    queryset = ChannelUser.objects.all()
     serializer_class = ChannelUserUpdateSerializer
 
 __all__ = ("ChannelUserUpdateApiView", )

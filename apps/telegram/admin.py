@@ -1,6 +1,6 @@
 from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin
-from .models import Chat, ChatUser, ChatMessage, Group, GroupUser, GroupMessage, Channel, ChannelUser, ChannelMessage, ChannelStories, ChannelDiscusion
+from .models import Chat, ChatUser, ChatMessage, Group, GroupUser, GroupMessage, Channel, ChannelUser, ChannelMessage, ChannelStories
 
 
 admin.site.register(Chat)
@@ -11,7 +11,6 @@ admin.site.register(GroupMessage)
 admin.site.register(ChannelUser)
 admin.site.register(ChannelMessage)
 admin.site.register(ChannelStories)
-admin.site.register(ChannelDiscusion)
 
 @admin.register(Group)
 class GroupAdmin(TranslationAdmin):

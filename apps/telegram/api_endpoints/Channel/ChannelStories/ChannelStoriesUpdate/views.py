@@ -4,7 +4,7 @@ from apps.telegram.models import ChannelStories
 
 
 class ChannelStoriesUpdateApiView(UpdateAPIView):
-    queryset = ChannelStories
+    queryset = ChannelStories.objects.all()
     serializer_class = ChannelStoriesUpdateSerializer
 
 __all__ = ("ChannelStoriesUpdateApiView", )

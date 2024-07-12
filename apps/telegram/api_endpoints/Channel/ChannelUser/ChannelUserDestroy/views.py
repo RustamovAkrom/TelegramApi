@@ -4,7 +4,7 @@ from apps.telegram.models import ChannelUser
 
 
 class ChannelUserDestroyApiView(DestroyAPIView):
-    queryset = ChannelUser
+    queryset = ChannelUser.objects.all()
     serializer_class = ChannelUserDestroySerializer
 
 __all__ = ("ChannelUserDestroyApiView", )

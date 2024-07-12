@@ -159,18 +159,10 @@ class ChannelStories(BaseSharedModel):
         verbose_name_plural = _("channel stories")
 
 
-class ChannelDiscusion(BaseSharedModel):
-    group = models.ForeignKey(Group, models.CASCADE, related_name="group_channel_discusion")
-
-    def __str__(self) -> str:
-        return self.group.name
-
-
 class ChannelMessage(BaseSharedModel):
     user = models.ForeignKey(ChannelUser, models.CASCADE, related_name="channel_user_messages")
     message = models.TextField(_("message"))
     media = models.FileField(_("media"), upload_to="telegram/channel/messages/%Y/%m/%d", blank=True, null=True)
-    discusions = models.OneToOneField(ChannelDiscusion, models.CASCADE, related_name="group_discusion_channel_message")
     
 
 class Channel(BaseSharedModel):
@@ -181,7 +173,6 @@ class Channel(BaseSharedModel):
     messages = models.ForeignKey(ChannelMessage, models.CASCADE, related_name="message_channel", blank=True, null=True)
     users = models.ManyToManyField(ChannelUser, related_name="users_channel")
     stories = models.ManyToManyField(ChannelStories, related_name="stories_channel", blank=True)
-    discusions = models.OneToOneField(ChannelDiscusion, models.CASCADE, related_name="discusion_channel", blank=True, null=True)
 
     def __str__(self) -> str:
         return self.name

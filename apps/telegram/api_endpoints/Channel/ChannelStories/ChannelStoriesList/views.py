@@ -1,10 +1,10 @@
 from rest_framework.generics import ListAPIView
-from .serializers import ChannelStoriesListSerializer
+from .serializers import ChannelStorieListSerializer
 from apps.telegram.models import ChannelStories
 
 
-class ChannelStoriesListApiView(ListAPIView):
-    queryset = ChannelStories
-    serializer_class = ChannelStoriesListSerializer
+class ChannelStorieListApiView(ListAPIView):
+    queryset = ChannelStories.objects.all()
+    serializer_class = ChannelStorieListSerializer
 
-__all__ = ("ChannelStoriesListApiView", )
+__all__ = ("ChannelStorieListApiView", )

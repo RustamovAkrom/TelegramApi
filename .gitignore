@@ -3,5 +3,9 @@ __pycache__/
 .env/
 env/
 media/
+staticfiles/
 .env
 database_tables.yaml
+db.sqlite3
+word.py
+MD_DOCUMENTATIONS/

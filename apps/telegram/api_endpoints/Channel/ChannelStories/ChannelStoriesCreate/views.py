@@ -1,10 +1,10 @@
 from rest_framework.generics import CreateAPIView
-from .serializers import ChannelStoriesCreateSerializer
+from .serializers import ChannelStorieCreateSerializer
 from apps.telegram.models import ChannelStories
 
 
-class ChannelStoriesCreateApiView(CreateAPIView):
-    queryset = ChannelStories
-    serializer_class = ChannelStoriesCreateSerializer
+class ChannelStorieCreateApiView(CreateAPIView):
+    queryset = ChannelStories.objects.all()
+    serializer_class = ChannelStorieCreateSerializer
 
-__all__ = ("ChannelStoriesCreateApiView", )
+__all__ = ("ChannelStorieCreateApiView", )
