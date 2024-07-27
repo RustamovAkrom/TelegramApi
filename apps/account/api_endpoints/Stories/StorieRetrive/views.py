@@ -7,4 +7,5 @@ class StorieRetriveApiView(RetrieveAPIView):
     queryset = Stories.objects.all()
     serializer_class = StorieRetriveSerializer
 
-__all__ = ("StorieRetriveApiView", )
+
+__all__ = ("StorieRetriveApiView",)

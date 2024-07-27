@@ -4,13 +4,8 @@ TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZX
 BASE_URL = "http://127.0.0.1:8000/en/api/v1/"
 
 
-headers = {
-    "Authorization": f"Bearer {TOKEN}"
-}
-data = {
-    "phone_number": "+998958786277",
-    "token": TOKEN
-}
+headers = {"Authorization": f"Bearer {TOKEN}"}
+data = {"phone_number": "+998958786277", "token": TOKEN}
 
 response = requests.get(BASE_URL + "account/user-activate/", data=data, headers=headers)
 

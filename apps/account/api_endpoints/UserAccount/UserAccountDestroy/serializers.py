@@ -5,4 +5,4 @@ from apps.account.models import UserAccount
 class UserAccountDestroySerializer(ModelSerializer):
     class Meta:
         model = UserAccount
-        fields = ("user")
+        fields = "user"

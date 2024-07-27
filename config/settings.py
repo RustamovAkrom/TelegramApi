@@ -15,9 +15,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 
-DEBUG = os.getenv("DEBUG") in ["true", "True", "1"]
+DEBUG = os.getenv("DEBUG") in ["true", "True", ""]
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 INSTALLED_APPS = INSTALLED_PACKAGES_APPS + DEFAULT_DJANGO_APPS + PROJECT_DJANGO_APPS
 
@@ -25,7 +25,7 @@ INSTALLED_APPS = INSTALLED_PACKAGES_APPS + DEFAULT_DJANGO_APPS + PROJECT_DJANGO_
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    'django.middleware.locale.LocaleMiddleware', # translation middleware
+    "django.middleware.locale.LocaleMiddleware",  # translation middleware
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -96,7 +96,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = "account.User"
 
-LANGUAGES  = (
+LANGUAGES = (
     ("en", _("English")),
     ("ru", _("Russia")),
     ("uz", _("Uzbek")),
@@ -115,7 +115,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-PHONENUMBER_REGION = "UZ" # defaul region phone
+PHONENUMBER_REGION = "UZ"  # defaul region phone
 
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR.joinpath("staticfiles")
@@ -126,13 +126,13 @@ MEDIA_ROOT = BASE_DIR.joinpath("media")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-AUTHENTICATION_TOKEN = os.getenv("AUTHENTICATION_TOKEN") # null True
+AUTHENTICATION_TOKEN = os.getenv("AUTHENTICATION_TOKEN")  # null True
 
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
+CELERY_BROKER_URL = "redis://localhost:6379/0"
+CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
 CELERY_TIMEZONE = TIME_ZONE
 
 # Logging

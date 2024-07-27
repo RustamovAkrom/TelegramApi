@@ -7,4 +7,5 @@ class ChatDestroyApiView(DestroyAPIView):
     queryset = Chat.objects.all()
     serializer_class = ChatDestroySerializer
 
-__all__ = ("ChatDestroyApiView", )
+
+__all__ = ("ChatDestroyApiView",)

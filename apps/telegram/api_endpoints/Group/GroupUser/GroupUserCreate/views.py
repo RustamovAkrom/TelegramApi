@@ -7,4 +7,5 @@ class GroupUserCreateApiView(CreateAPIView):
     queryset = GroupUser.objects.all()
     serializer_class = GroupUserCreateSerializer
 
-__all__ = ("GroupUserCreateApiView", )
+
+__all__ = ("GroupUserCreateApiView",)

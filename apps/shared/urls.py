@@ -3,6 +3,4 @@ from .views import index
 
 
 app_name = "shared"
-urlpatterns = [
-    path("", index, name="home")
-]
+urlpatterns = [path("", index, name="home")]

@@ -7,4 +7,5 @@ class ChatMessageUpdateApiView(UpdateAPIView):
     queryset = ChatMessage.objects.all()
     serializer_class = ChatMessageUpdateSerializer
 
-__all__ = ("ChatMessageUpdateApiView", )
+
+__all__ = ("ChatMessageUpdateApiView",)

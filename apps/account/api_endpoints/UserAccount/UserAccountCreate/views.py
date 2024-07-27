@@ -8,7 +8,8 @@ class UserAccountCreateApiView(CreateAPIView):
     serializer_class = UserAccountCreateSerializer
 
     def get_queryset(self):
-        
+
         return super().get_queryset()
-    
-__all__ = ("UserAccountCreateApiView", )
+
+
+__all__ = ("UserAccountCreateApiView",)

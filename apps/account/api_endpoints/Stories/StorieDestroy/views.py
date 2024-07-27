@@ -7,4 +7,5 @@ class StorieDestroyApiView(DestroyAPIView):
     queryset = Stories.objects.all()
     serializer_class = StorieDestroySerializer
 
-__all__ = ("StorieDestroyApiView", )
+
+__all__ = ("StorieDestroyApiView",)

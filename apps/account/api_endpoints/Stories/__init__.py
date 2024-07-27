@@ -5,8 +5,10 @@ from .StorieUpdate import *
 from .StroieList import *
 
 
-__all__ = ("StorieCreateApiView", 
-           "StorieDestroyApiView", 
-           "StorieRetriveApiView", 
-           "StorieUpdateApiView", 
-           "StorieListApiView")
+__all__ = (
+    "StorieCreateApiView",
+    "StorieDestroyApiView",
+    "StorieRetriveApiView",
+    "StorieUpdateApiView",
+    "StorieListApiView",
+)

@@ -4,7 +4,9 @@ from .UserList import *
 from .UserDestroy import *
 
 
-__all__ = ("UserActivateApiView", 
-           "UserCreateApiView", 
-           "UserListApiView",
-           "UserDestroyApiView")
+__all__ = (
+    "UserActivateApiView",
+    "UserCreateApiView",
+    "UserListApiView",
+    "UserDestroyApiView",
+)

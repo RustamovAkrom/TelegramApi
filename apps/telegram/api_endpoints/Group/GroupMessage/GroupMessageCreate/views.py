@@ -7,4 +7,5 @@ class GroupMessageCreateApiView(CreateAPIView):
     queryset = GroupMessage.objects.all()
     serializer_class = GroupMessageCreateSerializer
 
-__all__ = ("GroupMessageCreateApiView", )
+
+__all__ = ("GroupMessageCreateApiView",)

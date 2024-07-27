@@ -7,4 +7,5 @@ class GroupUpdateApiView(UpdateAPIView):
     queryset = Group.objects.all()
     serializer_class = GroupUpdateSerializer
 
-__all__ = ("GroupUpdateApiView", )
+
+__all__ = ("GroupUpdateApiView",)

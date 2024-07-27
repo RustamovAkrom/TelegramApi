@@ -7,4 +7,5 @@ class SavedMessageUpdateApiView(UpdateAPIView):
     queryset = SavedMessages.objects.all()
     serializer_class = SavedMessageUpdateSerializer
 
-__all__ = ("SavedMessageUpdateApiView", )
+
+__all__ = ("SavedMessageUpdateApiView",)

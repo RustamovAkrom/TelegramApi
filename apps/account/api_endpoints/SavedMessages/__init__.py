@@ -5,8 +5,10 @@ from .SavedMessageRetrive import *
 from .SavedMessageUpdate import *
 
 
-__all__ = ("SavedMessageCreateApiView", 
-           "SavedMessageDestroyApiView", 
-           "SavedMessageListAPiView", 
-           "SavedMessageRetriveApiView", 
-           "SavedMessageUpdateApiView")
+__all__ = (
+    "SavedMessageCreateApiView",
+    "SavedMessageDestroyApiView",
+    "SavedMessageListAPiView",
+    "SavedMessageRetriveApiView",
+    "SavedMessageUpdateApiView",
+)

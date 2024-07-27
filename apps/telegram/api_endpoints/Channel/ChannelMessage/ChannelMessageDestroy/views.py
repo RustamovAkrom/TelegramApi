@@ -7,4 +7,5 @@ class ChannelMessageDestroyApiView(DestroyAPIView):
     queryset = ChannelMessage.objects.all()
     serializer_class = ChannelMessageDestroySerializer
 
-__all__ = ("ChannelMessageDestroyApiView", )
+
+__all__ = ("ChannelMessageDestroyApiView",)

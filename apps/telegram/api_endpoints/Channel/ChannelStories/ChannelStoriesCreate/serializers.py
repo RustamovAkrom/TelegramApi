@@ -5,5 +5,4 @@ from apps.telegram.models import ChannelStories
 class ChannelStorieCreateSerializer(ModelSerializer):
     class Meta:
         model = ChannelStories
-        fields = ['storie', 'message']
-
+        fields = ["storie", "message"]

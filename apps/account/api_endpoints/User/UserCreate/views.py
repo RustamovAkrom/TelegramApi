@@ -8,32 +8,60 @@ from apps.account.models import User
 
 class UserCreateApiView(APIView):
     def get(self, request):
-        return Response(data={"username":_("Username"), "phone_number": _("Phone number"), "password": _("Password")})
-    
+        return Response(
+            data={
+                "username": _("Username"),
+                "phone_number": _("Phone number"),
+                "password": _("Password"),
+            }
+        )
+
     def post(self, request):
-        activated_account_link = "http://127.0.0.1:8000" + reverse("account:user-activate")
+        activated_account_link = "http://127.0.0.1:8000" + reverse(
+            "account:user-activate"
+        )
         username = request.data.get("username", None)
-        phone_number = request.data.get('phone_number', None)
+        phone_number = request.data.get("phone_number", None)
         password = request.data.get("password", None)
 
         try:
             if phone_number and username and password:
-                user_phone_exist = User.objects.filter(phone_number = phone_number).exists()
-                user_username_exist = User.objects.filter(username = username).exists()
+                user_phone_exist = User.objects.filter(
+                    phone_number=phone_number
+                ).exists()
+                user_username_exist = User.objects.filter(username=username).exists()
 
                 if user_phone_exist:
-                    return Response(data={"detail":_("User phone number already exist!")})
+                    return Response(
+                        data={"detail": _("User phone number already exist!")}
+                    )
 
                 if user_username_exist:
-                    return Response(data={"detail":_("User username already exist!")})
-                
-                user = User.objects.create(username = username, phone_number = phone_number)
+                    return Response(data={"detail": _("User username already exist!")})
+
+                user = User.objects.create(username=username, phone_number=phone_number)
                 user.set_password(password)
                 user.save()
 
-                return Response(data={"detail": _(f"{user.username} successfully created. Activate account link -> {activated_account_link}")}, status=status.HTTP_201_CREATED)
-            return Response(data={"detail": _("<phone_number> or <username> or <password> not found")}, status=status.HTTP_404_NOT_FOUND)
+                return Response(
+                    data={
+                        "detail": _(
+                            f"{user.username} successfully created. Activate account link -> {activated_account_link}"
+                        )
+                    },
+                    status=status.HTTP_201_CREATED,
+                )
+            return Response(
+                data={
+                    "detail": _("<phone_number> or <username> or <password> not found")
+                },
+                status=status.HTTP_404_NOT_FOUND,
+            )
         except:
-            return Response(data={"detail":_("Internal Server Error")}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-    
-__all__ = ("UserCreateApiView", )
+            return Response(
+                data={"detail": _("Internal Server Error")},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+
+
+__all__ = ("UserCreateApiView",)

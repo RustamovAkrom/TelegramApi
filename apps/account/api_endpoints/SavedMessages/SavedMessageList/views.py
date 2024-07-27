@@ -7,4 +7,5 @@ class SavedMessageListAPiView(ListAPIView):
     queryset = SavedMessages.objects.all()
     serializer_class = SavedMessageListSerializer
 
-__all__ = ("SavedMessageListAPiView", )
+
+__all__ = ("SavedMessageListAPiView",)

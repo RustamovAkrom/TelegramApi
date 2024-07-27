@@ -5,4 +5,4 @@ from apps.telegram.models import Chat
 class ChatListSerializer(ModelSerializer):
     class Meta:
         model = Chat
-        fields = ['user_from', 'user_to']
+        fields = ["user_from", "user_to"]

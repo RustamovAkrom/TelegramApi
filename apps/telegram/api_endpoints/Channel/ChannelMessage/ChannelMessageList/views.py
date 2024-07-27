@@ -7,4 +7,5 @@ class ChannelMessageListApiView(ListAPIView):
     queryset = ChannelMessage.objects.all()
     serializer_class = ChannelMessageListSerializer
 
-__all__ = ("ChannelMessageListApiView", )
+
+__all__ = ("ChannelMessageListApiView",)

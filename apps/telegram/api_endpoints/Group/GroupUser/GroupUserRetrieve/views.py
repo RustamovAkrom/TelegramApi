@@ -7,4 +7,5 @@ class GroupUserRetrieveApiView(RetrieveAPIView):
     queryset = GroupUser.objects.all()
     serializer_class = GroupUserRetrieveSerializer
 
-__all__ = ("GroupUserRetrieveApiView", )
+
+__all__ = ("GroupUserRetrieveApiView",)

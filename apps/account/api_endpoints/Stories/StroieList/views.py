@@ -8,4 +8,4 @@ class StorieListApiView(ListAPIView):
     serializer_class = StorieListSerializer
 
 
-__all__ = ("StorieListApiView", )
+__all__ = ("StorieListApiView",)

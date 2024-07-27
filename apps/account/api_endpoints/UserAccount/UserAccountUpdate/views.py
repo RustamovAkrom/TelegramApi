@@ -8,4 +8,4 @@ class UserAccountUpdateApiView(UpdateAPIView):
     serializer_class = UserAccountUpdateSerializer
 
 
-__all__ = ("UserAccountUpdateApiView", )
+__all__ = ("UserAccountUpdateApiView",)

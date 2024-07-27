@@ -5,8 +5,10 @@ from .UserAccountRetrive import *
 from .UserAccountUpdate import *
 
 
-__all__ = ("UserAccountCreateApiView", 
-           "UserAccountDestroyApiView",
-            "UserAccountListApiView",
-            "UserAccountRetriceApiView", 
-            "UserAccountUpdateApiView")
+__all__ = (
+    "UserAccountCreateApiView",
+    "UserAccountDestroyApiView",
+    "UserAccountListApiView",
+    "UserAccountRetriceApiView",
+    "UserAccountUpdateApiView",
+)

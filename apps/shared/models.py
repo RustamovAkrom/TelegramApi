@@ -7,6 +7,3 @@ class BaseSharedModel(models.Model):
 
     class Meta:
         abstract = True
-
-
-    

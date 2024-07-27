@@ -5,4 +5,4 @@ from apps.telegram.models import GroupMessage
 class GroupMessageRetrieveSerializer(ModelSerializer):
     class Meta:
         model = GroupMessage
-        fields = ['user', 'message', 'media']
+        fields = ["user", "message", "media"]

@@ -6,4 +6,3 @@ class StorieRetriveSerializer(ModelSerializer):
     class Meta:
         model = Stories
         fields = ("storie", "message")
-        

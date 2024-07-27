@@ -7,4 +7,5 @@ class UserAccountRetriceApiView(RetrieveAPIView):
     queryset = UserAccount.objects.all()
     serializer_class = UserAccountRetriveSerializer
 
-__all__ = ("UserAccountRetriceApiView", )
+
+__all__ = ("UserAccountRetriceApiView",)

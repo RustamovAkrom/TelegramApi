@@ -7,4 +7,5 @@ class AccountConfig(AppConfig):
 
     def ready(self) -> None:
         import apps.account.signals
+
         return super().ready()

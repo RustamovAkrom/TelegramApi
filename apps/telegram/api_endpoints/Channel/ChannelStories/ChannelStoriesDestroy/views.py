@@ -7,4 +7,5 @@ class ChannelStorieDestroyApiView(DestroyAPIView):
     queryset = ChannelStories.objects.all()
     serializer_class = ChannelStorieDestroySerializer
 
-__all__ = ("ChannelStorieDestroyApiView", )
+
+__all__ = ("ChannelStorieDestroyApiView",)

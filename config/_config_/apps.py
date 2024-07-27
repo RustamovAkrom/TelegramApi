@@ -1,6 +1,6 @@
 INSTALLED_PACKAGES_APPS = [
     "jazzmin",
-    "rest_framework", 
+    "rest_framework",
     "drf_yasg",
     "drf_spectacular",
     "drf_spectacular_sidecar",

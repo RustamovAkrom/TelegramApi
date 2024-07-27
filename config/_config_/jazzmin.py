@@ -7,7 +7,7 @@ JAZZMIN_SETTINGS = {
     "site_icon": "img/user.png",
     "site_logo": "img/user.png",
     "login_logo": "img/user.png",
-    "login_logo_dark":"img/user.png",
+    "login_logo_dark": "img/user.png",
     "user_avatar": "img/user.png",
     "show_sidebar": True,
     "navigation_expanded": True,
@@ -20,8 +20,12 @@ JAZZMIN_SETTINGS = {
         {"name": "Home", "url": "/", "new_window": False},
         {"name": "Swager-ui", "url": "/en/swagger-ui/", "new_window": False},
         {"name": "Reodoc", "url": "/en/reodoc/", "new_window": False},
-        {"name": "Token", "url": "/en/api/v1/account/token/", "new_window":False},
-        {"name": "Token Refresh", "url": "/en/api/v1/account/token/refresh/", "new_window":False}
+        {"name": "Token", "url": "/en/api/v1/account/token/", "new_window": False},
+        {
+            "name": "Token Refresh",
+            "url": "/en/api/v1/account/token/refresh/",
+            "new_window": False,
+        },
     ],
     "usermenu_links": [],
     "copyright": "Telegram Api Admin",

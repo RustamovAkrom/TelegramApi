@@ -7,4 +7,5 @@ class ChannelUpdateApiView(UpdateAPIView):
     queryset = Channel.objects.all()
     serializer_class = ChannelUpdateSerializer
 
-__all__ = ("ChannelUpdateApiView", )
+
+__all__ = ("ChannelUpdateApiView",)

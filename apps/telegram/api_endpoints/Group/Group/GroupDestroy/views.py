@@ -7,4 +7,5 @@ class GroupDestroyApiView(DestroyAPIView):
     queryset = Group.objects.all()
     serializer_class = GroupDestroySerializer
 
-__all__ = ("GroupDestroyApiView", )
+
+__all__ = ("GroupDestroyApiView",)

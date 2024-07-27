@@ -301,3 +301,175 @@ sudo journalctl -u gunicorn
 ```
 
 Следуя этим шагам, вы сможете настроить и запустить ваш Django проект с использованием Gunicorn и Nginx на Ubuntu.
+
+To set up Celery with Redis, Gunicorn, and Nginx in a Django configuration, you'll need to follow these steps:
+
+### 1. Install Required Packages
+
+First, make sure you have the required packages installed. You can install them using pip:
+
+```sh
+pip install celery redis gunicorn
+```
+
+### 2. Configure Celery
+
+Create a `celery.py` file in your Django project directory (same level as `settings.py`):
+
+```python
+from __future__ import absolute_import, unicode_literals
+import os
+from celery import Celery
+
+# Set the default Django settings module for the 'celery' program.
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'your_project_name.settings')
+
+app = Celery('your_project_name')
+
+# Using a string here means the worker doesn't have to serialize
+# the configuration object to child processes.
+app.config_from_object('django.conf:settings', namespace='CELERY')
+
+# Load task modules from all registered Django app configs.
+app.autodiscover_tasks()
+```
+
+Update your `settings.py` to include Celery configuration:
+
+```python
+# settings.py
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'
+```
+
+Create a `tasks.py` file in one of your Django apps to define a sample task:
+
+```python
+from celery import shared_task
+
+@shared_task
+def add(x, y):
+    return x + y
+```
+
+### 3. Configure Gunicorn
+
+Create a Gunicorn service file for systemd at `/etc/systemd/system/gunicorn.service`:
+
+```ini
+[Unit]
+Description=gunicorn daemon
+After=network.target
+
+[Service]
+User=your_user
+Group=www-data
+WorkingDirectory=/path/to/your/project
+ExecStart=/path/to/your/venv/bin/gunicorn --workers 3 --bind unix:/path/to/your/project/gunicorn.sock your_project_name.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Reload systemd to recognize the new service and start Gunicorn:
+
+```sh
+sudo systemctl daemon-reload
+sudo systemctl start gunicorn
+sudo systemctl enable gunicorn
+```
+
+### 4. Configure Nginx
+
+Create an Nginx configuration file for your site at `/etc/nginx/sites-available/your_project`:
+
+```nginx
+server {
+    listen 80;
+    server_name your_domain.com;
+
+    location / {
+        proxy_pass http://unix:/path/to/your/project/gunicorn.sock;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location /static/ {
+        alias /path/to/your/project/static/;
+    }
+
+    location /media/ {
+        alias /path/to/your/project/media/;
+    }
+}
+```
+
+Enable the site and restart Nginx:
+
+```sh
+sudo ln -s /etc/nginx/sites-available/your_project /etc/nginx/sites-enabled
+sudo nginx -t
+sudo systemctl restart nginx
+```
+
+### 5. Configure Celery Systemd Service
+
+Create a systemd service file for Celery at `/etc/systemd/system/celery.service`:
+
+```ini
+[Unit]
+Description=Celery Service
+After=network.target
+
+[Service]
+User=your_user
+Group=www-data
+WorkingDirectory=/path/to/your/project
+ExecStart=/path/to/your/venv/bin/celery -A your_project_name worker --loglevel=info
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Reload systemd to recognize the new service and start Celery:
+
+```sh
+sudo systemctl daemon-reload
+sudo systemctl start celery
+sudo systemctl enable celery
+```
+
+### 6. Start Redis
+
+Make sure Redis is installed and running. You can install it with:
+
+```sh
+sudo apt-get install redis-server
+```
+
+Start and enable Redis:
+
+```sh
+sudo systemctl start redis-server
+sudo systemctl enable redis-server
+```
+
+### Summary
+
+With these configurations, you have set up Celery with Redis, Gunicorn, and Nginx for your Django project. You can manage these services using systemd:
+
+```sh
+sudo systemctl start|stop|restart gunicorn
+sudo systemctl start|stop|restart celery
+sudo systemctl start|stop|restart nginx
+sudo systemctl start|stop|restart redis-server
+```
+
+Make sure to replace placeholders like `your_user`, `your_project_name`, and `/path/to/your/project` with actual values specific to your setup.

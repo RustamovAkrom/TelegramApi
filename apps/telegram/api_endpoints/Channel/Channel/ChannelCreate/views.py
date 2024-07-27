@@ -7,4 +7,5 @@ class ChannelCreateApiView(CreateAPIView):
     queryset = Channel.objects.all()
     serializer_class = ChannelCreateSerializer
 
-__all__ = ("ChannelCreateApiView", )
+
+__all__ = ("ChannelCreateApiView",)
